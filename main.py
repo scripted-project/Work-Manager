@@ -1,16 +1,22 @@
 from github import Github
 from pprint import pprint
-from flask import Flask, request
+from flask import Flask, request, redirect, url_for, render_template, session
 
 app = Flask(__name__)
 orgName = "scripted-project"
-data = {
-    "members": {},
-    "repos": {},
-    "teams": {}
-}
-
 g = Github()
+
+class Data(dict):
+    def __init__(self):
+        self.data = {
+            "username":"",
+            "password": "",
+            "data": {
+                "orgs": {},
+                "repos": {}
+            }
+        }
+    
 
 def retrieve(username: str, target: str, data: dict):
     if target == "repos" or "repo":
@@ -51,12 +57,29 @@ def retrieve(username: str, target: str, data: dict):
             }
 
 
-retrieve(orgName, "users", data["members"])
-retrieve(orgName, "repos", data["repos"])
+#retrieve(orgName, "users", data["members"])
+#retrieve(orgName, "repos", data["repos"])
 
-@app.route("/")
-def home():
+
+@app.route("/", methods=["POST", "GET"])
+def index():
     if request.method() == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
-        login = request.form.get("login")
+        login = request.form.get("login", False)
+        
+        if not username:
+            return render_template("index", error="Enter Username", username=username, password=password)
+        if not password:
+            return render_template("index.html", error="Enter Password", username=username, password=password)
+        
+        session["username"] = username
+        session["password"] = password
+        session["data"] = Data()
+        return redirect(url_for("dashboard"))
+    
+    return render_template("index.html")
+
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashoard.html")

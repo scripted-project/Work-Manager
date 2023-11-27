@@ -1,22 +1,14 @@
 from github import Github
 from pprint import pprint
-from flask import Flask, request, redirect, url_for, render_template, session
 
-app = Flask(__name__)
 orgName = "scripted-project"
-g = Github()
+data = {
+    "members": {},
+    "repos": {},
+    "teams": {}
+}
 
-class Data(dict):
-    def __init__(self):
-        self.data = {
-            "username":"",
-            "password": "",
-            "data": {
-                "orgs": {},
-                "repos": {}
-            }
-        }
-    
+g = Github()
 
 def retrieve(username: str, target: str, data: dict):
     if target == "repos" or "repo":
@@ -55,31 +47,29 @@ def retrieve(username: str, target: str, data: dict):
                 "name": user.name,
                 "repos": repos
             }
-
-
-#retrieve(orgName, "users", data["members"])
-#retrieve(orgName, "repos", data["repos"])
-
-
-@app.route("/", methods=["POST", "GET"])
-def index():
-    if request.method() == "POST":
-        username = request.form.get("username")
-        password = request.form.get("password")
-        login = request.form.get("login", False)
+def explore(data: dict):
+    current = data
+    layers = 0
+    while True:
+        layers += 1
+        print("Current Dictionary:")
+        for key, value in current.items():
+            if layers > 2:
+                print(f"{key}: {value}")
+            else:
+                print(f"{key}")
+        userInput = input()
         
-        if not username:
-            return render_template("index", error="Enter Username", username=username, password=password)
-        if not password:
-            return render_template("index.html", error="Enter Password", username=username, password=password)
-        
-        session["username"] = username
-        session["password"] = password
-        session["data"] = Data()
-        return redirect(url_for("dashboard"))
+        if userInput == "exit":
+            break
+        if userInput in current and isinstance(current[userInput], dict):
+            current = current[userInput]
+        else:
+            print("Invalid")
     
-    return render_template("index.html")
 
-@app.route("/dashboard")
-def dashboard():
-    return render_template("dashoard.html")
+retrieve(orgName, "users", data["members"])
+retrieve(orgName, "repos", data["repos"])
+
+if __name__ == "__main__":
+    explore(data)

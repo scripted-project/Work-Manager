@@ -1,0 +1,96 @@
+Day 1 - January 26
+Julian
+Project Beginning
+
+This project is supposed to be a work manager dashboard, so you can have all your work in one place.
+I decided to start a bit earlier because I didn't want to forget my ideas. So today I created this file tree:
+- data
+- modules/
+-- api.py
+API Class for use later, to organize better. API has the addresses of the api endpoints and some testing stuff.
+-- logs.py
+A Logger class for use later again, so I can log the way I would like it.
+-- server.py
+An empty file for now, in preperation for later.
+-- site.py
+Site class for later use. Also has some addresses but not really for anything.
+- templates/
+-- index.html
+Nothing in this file.
+- .gitignore
+Some git stuff.
+- main.py
+The main python file, where all the modules are used.
+- project.log
+That's where I'm writing this now.
+- README.md && requirments.txt
+
+so, in total it looks like:
+root:
+|- data
+|- modules
+|-- api.py
+|-- logs.py
+|-- server.py
+|-- site.py
+|- templates
+|-- index.html
+|- .gitignore
+|- main.py
+|- project.log, README.md && requirements.txt
+
+EDIT: I'm adding a new directory: logs
+I will put a new .log file for each log with the date
+
+File snapshots (compressed):
+main.py:
+    ```py
+    from modules.api import API
+    from modules.site import Site
+    from modules.logs import Logger
+    from flask import Flask
+    import logging
+    app = Flask(__name__)
+    app.logger.setLevel(logging.ERROR)
+    log = logging.getLogger('werkzeug')
+    log.disabled = True
+    logger = Logger()
+    api = API(app, logger)
+    site = Site(app, logger)
+    if __name__ == '__main__':
+        app.run()
+    ```
+api.py:
+    ```py
+    from flask import Flask, jsonify
+    from modules.logs import Logger
+    class API:
+        def __init__(self, app: Flask, logger: Logger):
+            @app.route('/api/test')
+            def test():
+                res = {"hello": """worldjhkjhnjnjkknjnjnjjjhjghhgfhgfrtderestrstrdtfdgfcgfcgfclglgkygyugkyugyugyugyugygkygkuyghkhghgkhuigjhgkgfjghfjytfjhgfjhfgjhgjghjgh"""}
+                logger.log(f"GET '/api/test': {res}")
+                return jsonify(res)
+    ```
+    I was testing long string logging
+logs.py:
+    ```py
+    import logging
+    class Logger:
+        def __init__(self):
+            logger = logging.getLogger(__name__)
+            logger.setLevel(logging.INFO)
+            handler = logging.StreamHandler()
+            formatter = logging.Formatter('\033[93m[%(asctime)s %(levelname)s]\033[0m \033[96m%(name)s\033[0m -> \033[94m%(message)s\033[0m')
+            handler.setFormatter(formatter)
+            logger.addHandler(handler)
+            self.logger = logger
+        def log(self, message: str, level = logging.INFO):
+            message = message.replace('\n', ' [\\n] ')
+            if len(message) > 128: message = "".join(message[slice(0, 128)] + "...")
+            if level == logging.INFO: self.logger.info(message)
+            if level == logging.ERROR: self.logger.error(message)
+    ```
+Everything else is empty mostly, or not important
+
+This is Commit (relative) 1

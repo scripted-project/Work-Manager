@@ -9,10 +9,16 @@ app = Flask(__name__)
 unusedLog = logging.getLogger('werkzeug')
 unusedLog.setLevel(logging.ERROR)
 
+users = {}
+
+shared = {
+    "users": users
+}
+
 logger = Logger()
 
-site = Site(app, logger)
-api = API(app, logger)
+site = Site(app, logger, shared)
+api = API(app, logger, shared)
 
 if __name__ == "__main__":
     app.run()

@@ -1,0 +1,9 @@
+body {
+    background-color: antiquewhite;
+    font-family: Helvetica, sans-serif;
+}
+
+#page-1-main {
+    border: 2px;
+    border-color: orange;
+}

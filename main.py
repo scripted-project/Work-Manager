@@ -12,7 +12,8 @@ unusedLog.setLevel(logging.ERROR)
 users = {}
 
 shared = {
-    "users": users
+    "users": users,
+    "clients": {}
 }
 
 logger = Logger()

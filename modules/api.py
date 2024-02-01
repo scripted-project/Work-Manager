@@ -3,6 +3,7 @@ from modules.switches import Switch
 from flask import Flask, make_response, request
 from secrets import choice
 from string import ascii_uppercase, ascii_lowercase, digits, punctuation
+import logging
 
 class API:
     def __init__(self, app: Flask, logger: Logger, shared: dict):
@@ -42,9 +43,31 @@ class API:
             return response
         @app.route("/api/channels/<id>")
         def channel(id: int):
-            body = request.json
-            
-            if "request-type" not in body: 
-                return make_response({"code": 400, "description": "Bad Request"})
-            
-            switch = Switch(body["request-type"])
+            try:
+                body = request.json
+                response = {}
+                switch = Switch(body["request-type"])
+
+                @switch.case("dashboard")
+                def dashboard():
+                    switch2 = Switch(request.method)
+
+                    @switch.case("GET")
+                    def get():
+                        response["code"] = 202
+                        response["description"] = "Accepted"
+                        response["out"] = "out"
+
+                @switch.default
+                def default():
+                    response["code"] = 400
+                    response["description"] = "Bad Request"
+                    response["out"] = "out"
+
+                switch.execute()
+                return make_response(response)
+            except Exception as e:
+                response = {"code": 400, "description": "Bad Request"}
+                logger.log(f"POST '/api/channels/{id}' (with body {body}): {response}")
+                logger.log(e, logging.ERROR)
+                return make_response(response)

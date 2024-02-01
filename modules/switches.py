@@ -11,6 +11,6 @@ class Switch:
     def default(self, func):
         self.default_case = func
         return func
-    def executed(self):
+    def execute(self):
         func = self.cases.get(self.value, self.default_case)
         return func

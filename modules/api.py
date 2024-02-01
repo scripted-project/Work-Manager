@@ -1,5 +1,6 @@
 from modules.logs import Logger
 from modules.switches import Switch
+from modules.encryption import new_key
 from flask import Flask, make_response, request
 from secrets import choice
 from string import ascii_uppercase, ascii_lowercase, digits, punctuation
@@ -27,7 +28,7 @@ class API:
         
         @app.route("/api/handshake")
         def handshake():
-            key = ''.join(choice(ascii_lowercase + ascii_uppercase + digits + punctuation) for _ in range(16))
+            key = new_key(16)
             data = {
                 "code": 202,
                 "description": "Accepted",

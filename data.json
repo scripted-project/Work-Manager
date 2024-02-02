@@ -1,0 +1,10 @@
+{
+    "example user": {
+        "dashboards": {
+            "id": {
+                "x,y": {"widget": "widget"}
+            }
+        },
+        "password": ""
+    }
+}

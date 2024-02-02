@@ -19,8 +19,8 @@ class Site:
             logger.log(f"GET '/dash': dashboard.html ({response.status_code})")
             return response
         
-        @app.route("/dash/<id>")
-        def dashboard_withID(id: int):
-            response = make_response(render_template("dashboard.html", id=id))
-            logger.log(f"GET '/dash/{id}: dashboard.html [id = {id}] ({response.status_code})")
+        @app.route("/<user>")
+        def dashboard_withID(username: str):
+            response = make_response(render_template("dashboard.html", username=username))
+            logger.log(f"GET '/dash/{username}: dashboard.html [id = {username}] ({response.status_code})")
             return response

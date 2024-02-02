@@ -2,15 +2,15 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="../resources/styles.css">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" />
         <title>WorkManger</title>
     </head>
     <body>
-        <header>
-            <div class="topbar"></div>
-            <h1>WorkManger</h1>
-        </header>
+        <div class="topbar"></div>
+        <h1>WorkManger</h1>
         <h2>The food themed work manager.</h2>
-        <div id="page-1-main"></div>
+        <div id="page-1-main">
+            <p>Test</p>
+        </div>
     </body>
 </html>

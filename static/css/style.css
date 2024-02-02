@@ -1,3 +1,8 @@
 body {
-    color: orange;
+    color: rgb(0, 0, 0);
+    background-color: orange;
+}
+
+.page-1-main {
+    background-color: white;
 }

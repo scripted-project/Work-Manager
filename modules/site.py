@@ -1,10 +1,11 @@
 from modules.logs import Logger
+from modules.server import Server
 from flask import Flask, render_template, make_response
 
 class Site:
-    def __init__(self, app: Flask, logger: Logger, shared: dict):
+    def __init__(self, app: Flask, logger: Logger, server: Server):
         
-        shared["clients"] = {}
+        clients = server.clients
 
         @app.route("/")
         def index():

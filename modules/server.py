@@ -7,3 +7,5 @@ class Server:
 
     def newUser(self, name: str, password: str):
         self.clients[name] = {"password": password}
+    
+    

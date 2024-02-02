@@ -7,10 +7,10 @@ from string import ascii_uppercase, ascii_lowercase, digits, punctuation
 import logging
 
 class API:
-    def __init__(self, app: Flask, logger: Logger, shared: dict):
+    def __init__(self, app: Flask, logger: Logger, server):
         handshakes = {}
         self.nextHandshakeID = 1
-        users = shared["users"]
+        users = server.clients
         
         @app.route("/internal/api/test/get", methods=["GET"])
         def testGET():

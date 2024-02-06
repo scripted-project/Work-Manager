@@ -15,4 +15,3 @@ class Server:
             "password": password,
             "dashboards": {}
         }
-    

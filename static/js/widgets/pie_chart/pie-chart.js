@@ -13,7 +13,7 @@ async function entryPoint(container) {
     options: {
         title: {
         display: true,
-        text: 'Pie Chart for admin panel'
+        text: 'Pie Chart'
         },
         responsive: true
     }

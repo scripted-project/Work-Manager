@@ -1,10 +1,13 @@
 import fs from 'node:fs';
-async function load(container, name) {
-    const path = `./widgets/${name}/entry.html`;
+import * as Flask from 'flask';
+function load(container, name) {
+    const path = `.js/widgets/${name}/entry.html`;
     if (fs.existsSync(path)) {
-        document.getElementById(container).outerHTML += `<iframe src="./widgets/${name}/entry.html"></iframe>`
+        let content = `<iframe src="${path}"></iframe>`;
+        document.getElementById(container).innerHTML(content);
+        return 200;
     }
-    else {document.getElementById(container).outerHTML = '<h3>not found</h3>'}   
+    else {document.getElementById(container).outerHTML = '<h3>not found</h3>'; return 404;}
 }
 
 module.exports = {

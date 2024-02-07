@@ -1,4 +1,4 @@
-async function apiGET(url) {
+async function get(url) {
     try {
         const response = await fetch(url);
         const data = await response.json()
@@ -8,7 +8,7 @@ async function apiGET(url) {
         return null;
     }
 }
-async function apiPOST(url, data) {
+async function post(url, data) {
     try {
         const response = await fetch(url, {
             method: 'POST',
@@ -21,7 +21,7 @@ async function apiPOST(url, data) {
     }
 }
 
-async function apiPATCH(url, updatedFields) {
+async function patch(url, updatedFields) {
     try {
         const response = await fetch(url, {
             method: 'PATCH',
@@ -34,5 +34,5 @@ async function apiPATCH(url, updatedFields) {
     }
 }
 module.exports = {
-    apiGET, apiPATCH, apiPOST
+    get, patch, post
 }

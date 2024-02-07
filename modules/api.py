@@ -1,5 +1,6 @@
 from modules.logs import Logger
 from modules.switches import Switch
+from modules.json import JSON
 from modules.encryption import new_key
 from modules.server import Server
 from flask import Flask, make_response, request
@@ -9,10 +10,6 @@ import logging
 
 class API:
     def __init__(self, app: Flask, logger: Logger, server: Server):
-        handshakes = {}
-        self.nextHandshakeID = 1
-        users = server.clients
-        
         @app.route("/internal/api/test/get", methods=["GET"])
         def testGET():
             data = {"message": "Hello World!"}
@@ -27,20 +24,16 @@ class API:
             logger.log(f"POST '/internal/api/test/post' (with request: {request.json}): {data}")
             return response
         
-        @app.route("/api/handshake")
-        def handshake():
-            key = new_key(16)
-            data = {
-                "code": 202,
-                "description": "Accepted",
-                "id": self.nextHandshakeID,
-                "key": key,
-                "channel": f"/api/channels/{self.nextHandshakeID}"
-            }
-            handshakes[self.nextHandshakeID] = key
-            self.nextHandshakeID += 1
-            
-            response = make_response(data)
-            logger.log(f"GET '/api/handshake': {data}")
-            return response
-        
+        @app.route("/api/widgets/<id>", methods=["GET"])
+        def getwidget(id: str):
+            data = JSON(f'/data/widgets/{id}.json')
+            if (data.data == None):
+                responseData = {}
+                response = make_response(responseData)
+                response.status_code = 404
+                return response
+            else:
+                responseData = {"data": data.data}
+                response = make_response(responseData)
+                response.status_code = 200
+                return response

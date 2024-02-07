@@ -1,0 +1,3 @@
+function newWidget(name) {
+    
+}

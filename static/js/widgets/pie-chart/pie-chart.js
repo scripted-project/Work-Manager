@@ -1,7 +1,5 @@
-import load from '../../loader.js';
-
-function entryPoint() {
-    new Chart(document.getElementById('pie-chart'), {
+async function entryPoint(container) {
+    new Chart(container.getElementById('pie-chart'), {
     type: 'pie',
     data: {
         labels: ["HTML", "CSS", "JavaScript", "PHP", "MySql"],

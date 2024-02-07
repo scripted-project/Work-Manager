@@ -1,15 +1,9 @@
-import fs from 'node:fs';
-
 function load(container, name) {
-    const path = `/js/widgets/${name}/entry.html`;
-    if (fs.existsSync(path)) {
-        let content = `<iframe src="${path}"></iframe>`;
-        document.getElementById(container).innerHTML(content);
-        return 200;
-    }
-    else {document.getElementById(container).outerHTML = '<h3>not found</h3>'; return 404;}
+    try {
+        const iframe = document.createElement('iframe');
+        iframe.src = `${baseUrl}/widgets/${name}/entry.html`;
+        document.getElementById(container).appendChild(iframe);
+    } catch {}
 }
 
-module.exports = {
-    load
-}
+export { load };

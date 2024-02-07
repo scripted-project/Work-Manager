@@ -5,5 +5,8 @@
         <h1 id="heading">Test</h1>
         <div id="test-cont"></div>
     </body>
-    <script src="{{ url_for('static', filename='js/test.js') }}"></script>
+    <script>
+        var baseUrl = "{{ url_for('static', filename='') }}";
+    </script>
+    <script type="module" src="{{ url_for('static', filename='js/test.js') }}"></script>
 </html>

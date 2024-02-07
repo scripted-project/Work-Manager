@@ -3,7 +3,7 @@ from modules.switches import Switch
 from modules.json import JSONFile
 from modules.encryption import new_key
 from modules.server import Server
-from flask import Flask, make_response, request
+from flask import Flask, make_response, request, url_for
 from secrets import choice
 from string import ascii_uppercase, ascii_lowercase, digits, punctuation
 import logging
@@ -27,13 +27,18 @@ class API:
         @app.route("/api/widgets/<id>", methods=["GET"])
         def getwidget(id: str):
             data = JSONFile(f'./data/widgets/{id}.json')
-            if (data.data == None):
+            try:
+                html = open(f'static/js/widgets/{id}/entry.html')
+                html = html.read()
+            except:
+                html = None
+            if (data.data == None or html == None):
                 responseData = {}
                 response = make_response(responseData)
                 response.status_code = 404
                 return response
             else:
-                responseData = {"data": data.data}
+                responseData = {"data": data.data }
                 response = make_response(responseData)
                 response.status_code = 200
                 return response

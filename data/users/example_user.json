@@ -1,0 +1,8 @@
+{
+    "password": "12345",
+    "id": "example_user",
+    "name": "Example User",
+    "dashboards": [
+        "example_dashboard"
+    ]
+}

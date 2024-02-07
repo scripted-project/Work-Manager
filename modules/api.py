@@ -38,7 +38,20 @@ class API:
                 response.status_code = 404
                 return response
             else:
-                responseData = {"data": data.data }
+                responseData = {"data": data.data, "html": html}
+                response = make_response(responseData)
+                response.status_code = 200
+                return response
+        @app.route("/api/users/<id>", methods=["GET"])
+        def getuser(id: str):
+            data = JSONFile(f'./data/users/{id}.json')
+            if (data.data == None):
+                responseData = {}
+                response = make_response(responseData)
+                response.status_code = 404
+                return response
+            else:
+                responseData = {"data": data.data}
                 response = make_response(responseData)
                 response.status_code = 200
                 return response

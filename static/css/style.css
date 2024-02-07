@@ -8,3 +8,9 @@ body {
     background-color: rgb(255, 128, 0);
     color: white;
 }
+.navagationbar {
+    color:orange;
+    overflow: hidden;
+}
+
+.navagationbar a {color: aliceblue;}

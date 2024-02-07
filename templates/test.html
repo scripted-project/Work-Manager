@@ -6,7 +6,7 @@
         <div id="test-cont"></div>
     </body>
     <script>
-        import newWidget from '{{ url_for("static", filename="js/loader.js"}}';
+        import load from '{{ url_for("static", filename="js/loader.js") }}';
         await load("test-cont", "example_widget");
     </script>
 </html>

@@ -5,9 +5,5 @@
         <h1 id="heading">Test</h1>
         <div id="test-cont"></div>
     </body>
-    <script>
-        import load from '{{ url_for("static", filename="js/loader.js") }}';
-        let res = load("test-cont", "example_widget");
-        if (res == 404) {document.getElementById("heading").innerHTML = "DId not work";}
-    </script>
+    <script src="{{ url_for('static', filename='js/test.js') }}"></script>
 </html>

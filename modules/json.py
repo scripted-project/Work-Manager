@@ -1,12 +1,12 @@
 import json
 
-class JSON:
+class JSONFile:
     def __init__(self, path, mode='r'):
         try:
             f = open(path, mode)
-            self.data = json.load(f.read())
+            self.data = json.load(f)
             self.path = path
-        except Exception as e: return
+        except Exception as e: print(e)
 
     def save(self):
         try:

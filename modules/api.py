@@ -1,6 +1,6 @@
 from modules.logs import Logger
 from modules.switches import Switch
-from modules.json import JSON
+from modules.json import JSONFile
 from modules.encryption import new_key
 from modules.server import Server
 from flask import Flask, make_response, request
@@ -26,7 +26,7 @@ class API:
         
         @app.route("/api/widgets/<id>", methods=["GET"])
         def getwidget(id: str):
-            data = JSON(f'/data/widgets/{id}.json')
+            data = JSONFile(f'./data/widgets/{id}.json')
             if (data.data == None):
                 responseData = {}
                 response = make_response(responseData)

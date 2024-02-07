@@ -4,6 +4,7 @@ async function load(container, name) {
     if (fs.existsSync(path)) {
         document.getElementById(container).innerHTML = fs.readFile(path);
     }
+    
 }
 
 module.exports = {

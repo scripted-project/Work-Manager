@@ -1,8 +1,9 @@
-function load(container, name) {
+function load(containerID, name, settingsString) {
     try {
         const iframe = document.createElement('iframe');
-        iframe.src = `${baseUrl}/widgets/${name}/entry.html`;
-        document.getElementById(container).appendChild(iframe);
+        var src = `${baseUrl}/widgets/${name}/entry.html${settingsString}`;
+        iframe.src = src;
+        document.getElementById(containerID).appendChild(iframe);
     } catch {}
 }
 

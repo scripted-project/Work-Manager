@@ -1,5 +1,5 @@
-async function entryPoint(container) {
-    new Chart(container.getElementById('pie-chart'), {
+
+new Chart(container.getElementById('pie-chart'), {
     type: 'pie',
     data: {
         labels: ["HTML", "CSS", "JavaScript", "PHP", "MySql"],
@@ -17,6 +17,4 @@ async function entryPoint(container) {
         },
         responsive: true
     }
-    });
-
-}
+});

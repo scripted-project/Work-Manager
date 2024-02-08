@@ -14,3 +14,9 @@ body {
 }
 
 .navagationbar a {color: aliceblue;}
+
+.container {
+    display: grid;
+    grid-auto-columns: auto;
+    grid-auto-rows: auto;
+}

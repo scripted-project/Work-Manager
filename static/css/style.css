@@ -9,11 +9,20 @@ body {
     color: white;
 }
 .navagationbar {
-    color:orange;
+    color:antiquewhite;
     overflow: hidden;
+    background-color: orange;
 }
 
-.navagationbar a {color: aliceblue;}
+.navagationbar a {
+    color: antiquewhite;
+    background-color: yellow;
+}
+
+.navagationbar a:hover {
+    color: antiquewhite;
+    background-color: yellow;
+}
 
 .container {
     display: grid;

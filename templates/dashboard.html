@@ -4,4 +4,11 @@
     <body>
         <div id="container"></div>
     </body>
+    <script src="{{ url_for('static', filename='js/loader.js')}}" type="module"></script>
+    <script>const baseURL = '{{ url_for("static", filename="") }}';</script>
+    <script>
+        const params = new URLSearchParams();
+        const id = params.get("id");
+        setUpDashboard(id);
+    </script>
 </html>

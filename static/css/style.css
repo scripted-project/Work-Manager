@@ -5,23 +5,23 @@ body {
 }
 
 .page-1-main {
-    background-color: rgb(255, 128, 0);
+    background-color: #f65113;
     color: white;
 }
 .navagationbar {
     color:antiquewhite;
     overflow: hidden;
-    background-color: orange;
+    background-color: #f65113;
 }
 
 .navagationbar a {
     color: antiquewhite;
-    background-color: yellow;
+    background-color: #f9b31c;
 }
 
 .navagationbar a:hover {
     color: antiquewhite;
-    background-color: yellow;
+    background-color: #f9b31c;
 }
 
 .container {

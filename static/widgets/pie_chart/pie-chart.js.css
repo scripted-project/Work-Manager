@@ -12,16 +12,16 @@
     margin: 0;
   }
   .container {
-    background-color: orange;
+    background-color: #f65113;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     width: 740px;
-    border-color:white ;
+    border-color:antiquewhite ;
   }
   h1 {
     text-align: center;
     margin: 20px 0;
-    color: black;
+    color: antiquewhite;
 
   }
   

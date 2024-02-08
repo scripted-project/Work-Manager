@@ -12,7 +12,7 @@ async function post(url, data) {
     try {
         const response = await fetch(url, {
             method: 'POST',
-            headers: {'Cntent-Type': 'application/json'},
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
         });
         return await response.json();

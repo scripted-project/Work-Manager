@@ -34,4 +34,27 @@ function setUpDashboard(dashboardID) {
     });
 }
 
-export { load, setUpDashboard };
+function addWidget(widgetID, dashboardID, x, y, height, width) {
+    let currentDash = api.get(`/api/dashboards/${dashboardID}`);
+    currentDash["dashboards"].push({
+        id: widgetID,
+        x: x,
+        y: y,
+        width: width,
+        height: height,
+        settings: {}
+    });
+    load(n, widgetID, '', x, y, height, width);
+}
+
+function widgetOverlay() {
+    const overlay = document.getElementById("selection-overlay");
+    overlay.style.display = 'flex';
+    
+    data = api.get("/api/widgets-lst");
+    data.data.forEach(element => {
+        overlay.innerHTML += `<button>${element.name}</button>`;
+    });
+}
+
+export { load, setUpDashboard, addWidget };

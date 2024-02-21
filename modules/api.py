@@ -6,6 +6,7 @@ from modules.server import Server
 from flask import Flask, make_response, request, url_for
 from secrets import choice
 from string import ascii_uppercase, ascii_lowercase, digits, punctuation
+from os import listdir, path
 import logging
 
 class API:
@@ -50,3 +51,17 @@ class API:
                 response = make_response(responseData)
                 response.status_code = 200
                 return response
+        @app.route("/api/widgets-lst")
+        def widgetlst():
+            _data = []
+            dir = "./data/widgets"
+
+            for name in listdir(dir):
+                json = JSONFile(path.join(dir, name))
+                _data.append(json.data)
+
+            data = {"data": _data}
+
+            response = make_response(data)
+            response.status_code = 200
+            return response

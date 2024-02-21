@@ -1,4 +1,5 @@
 from flask import Flask
+from json import dump
 from modules.json import JSONFile
 
 class Server:
@@ -18,8 +19,9 @@ class Server:
         self.clients[user]["dashboards"].append(self._nextDashboardID)
         f = open(f"data/dashboards/{self._nextDashboardID}.json", 'x')
         f.write("{}")
-        json = JSONFile(f'data/dashboards/{self._nextDashboardID}.json')
-        json.data = {"id": self._nextDashboardID, "widgets": []}
-        json.save()
+        data = {"id": self._nextDashboardID, "widgets": []}
+        
+        dump(data, f)
+
         self._nextDashboardID += 1
         

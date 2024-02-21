@@ -16,7 +16,8 @@ class Server:
 
     def newDash(self, user: str):
         self.clients[user]["dashboards"].append(self._nextDashboardID)
-        json = JSONFile(f'/data/dashboards/{self._nextDashboardID}', 'x')
+        open(f"/data/dashboards/{self._nextDashboardID}", 'x')
+        json = JSONFile(f'/data/dashboards/{self._nextDashboardID}')
         json.data = {"id": self._nextDashboardID, "widgets": []}
         self._nextDashboardID += 1
         

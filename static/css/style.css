@@ -30,7 +30,7 @@ body {
     grid-auto-rows: auto;
 }
 
-.selection-overlay {
+#selection-overlay {
     position: fixed;
     display: none;
     width: 70%;

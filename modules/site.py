@@ -16,7 +16,7 @@ class Site:
             logger.log(f"GET '/dash': dashboard.html ({response.status_code})")
             return response
         
-        @app.route("/login-signup")
+        @app.route("/login-signup", methods=["POST", "GET"])
         def login_signup():
             if request.method == 'POST': 
                 username = request.form.get("username", None)

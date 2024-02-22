@@ -36,7 +36,7 @@ function setUpDashboard(dashboardID) {
 
 function addWidget(widgetID, dashboardID, x, y, height, width) {
     let currentDash = api.get(`/api/dashboards/${dashboardID}`);
-    currentDash["dashboards"].push({
+    currentDash.dashboards.push({
         id: widgetID,
         x: x,
         y: y,
@@ -48,12 +48,13 @@ function addWidget(widgetID, dashboardID, x, y, height, width) {
 }
 
 function widgetOverlay() {
-    const overlay = document.getElementById("selection-overlay");
+    const overlay = document.getElementById("overlay");
     overlay.style.display = 'flex';
+    overlay.style.visibility = 'visible';
     
     data = api.get("/api/widgets-lst");
     data.data.forEach(element => {
-        overlay.innerHTML += `<button onClick="load(n, element.id, '', 0, 0, 2, 2)>${element.name}</button>`;
+        overlay.innerHTML += `<button onclick="load(n, element.id, '', 0, 0, 2, 2)>${element.name}</button>`;
     });
 }
 

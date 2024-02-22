@@ -30,9 +30,10 @@ body {
     grid-auto-rows: auto;
 }
 
-#selection-overlay {
+#overlay {
     position: fixed;
     display: none;
+    visibility: hidden;
     width: 70%;
     height: 50%;
     min-width: 70%;

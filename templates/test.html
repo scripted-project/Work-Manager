@@ -2,12 +2,15 @@
 <html>
     <head></head>
     <body>
-        <h1 id="heading">Test</h1>
-        <button onclick="load('test-cont', 'example_widget', '', 1, 1)">Click</button>
-        <div id="test-cont"></div>
+        
     </body>
     <script>
         var baseUrl = "{{ url_for('static', filename='') }}";
     </script>
     <script type="module" src="{{ url_for('static', filename='js/loader.js') }}"></script>
+    <script>
+        load(1, "bar_chart", "", 0, 0, 2, 2);
+        load(1, "pie_chart", "", 0, 0, 2, 2);
+        load(1, "example_widget", "", 0, 0, 2, 2);
+    </script>
 </html>

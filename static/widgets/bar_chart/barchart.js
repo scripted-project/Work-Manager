@@ -8,7 +8,7 @@ function start() {
   var yValues = [seconddata.innerText];
   var barColors = [red, yellow, green, orange, blue];
 
-  new Chart("myChart", {
+  new Chart("barchart", {
     type: "bar",
     data: {
       labels: xValues,

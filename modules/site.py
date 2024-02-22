@@ -14,6 +14,7 @@ class Site:
         def dashboard():
             response = make_response(render_template("dashboard.html"))
             logger.log(f"GET '/dash': dashboard.html ({response.status_code})")
+            
             return response
         
         @app.route("/login-signup", methods=["POST", "GET"])

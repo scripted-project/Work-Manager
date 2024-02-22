@@ -19,7 +19,18 @@ class Server:
         self.clients[user]["dashboards"].append(self._nextDashboardID)
         f = open(f"data/dashboards/{self._nextDashboardID}.json", 'x')
         
-        data = {"id": self._nextDashboardID, "widgets": []}
+        data = {"id": self._nextDashboardID, "widgets": [
+            
+            {
+                    "id": "example_widget",
+                    "settings": {"setting1": "cool"},
+                    "x": 1,
+                    "y": 1,
+                    "height": 10,
+                    "width": 10
+            }
+            
+        ]}
         
         dump(data, f)
 

@@ -1,5 +1,7 @@
 import * as api from './api.js';
 
+let n = 0;
+
 function load(containerID, name, settingsString, x, y, height, width) {
     try {
         const iframe = document.createElement('iframe');
@@ -23,7 +25,6 @@ function setUpDashboard(dashboardID) {
     const container = document.getElementById('container'); // get container
     if (container == null) {return;} // prove non-null
 
-    let n = 0;
     dashboardData["widgets"].forEach(element => {
         const div = document.createElement('div');
         container.appendChild(div);
@@ -44,9 +45,15 @@ function addWidget(widgetID, dashboardID, x, y, height, width) {
         height: height,
         settings: {}
     });
+    newDIV("container", n);
     load(n, widgetID, '', x, y, height, width);
+    n += 1;
 }
-
+function newDIV(container, i) {
+    const div = document.createElement('div');
+    div.id = i;
+    container.appendChild(div);
+}
 function widgetOverlay() {
     const overlay = document.getElementById("overlay");
     overlay.style.display = 'flex';
@@ -54,7 +61,7 @@ function widgetOverlay() {
     
     data = api.get("/api/widgets-lst");
     data.data.forEach(element => {
-        overlay.innerHTML += `<button onclick="load(n, element.id, '', 0, 0, 2, 2)>${element.name}</button>`;
+        overlay.innerHTML += `<button onclick="addWidget(">${element.name}</button>`;
     });
 }
 

@@ -53,7 +53,7 @@ function widgetOverlay() {
     
     data = api.get("/api/widgets-lst");
     data.data.forEach(element => {
-        overlay.innerHTML += `<button>${element.name}</button>`;
+        overlay.innerHTML += `<button onClick="load(n, element.id, '', 0, 0, 2, 2)>${element.name}</button>`;
     });
 }
 

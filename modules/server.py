@@ -4,7 +4,7 @@ from modules.json import JSONFile
 
 class Server:
     def __init__(self, app: Flask):
-        self.clients = {}
+        self.clients = {} 
         self.handshakes = {}
 
         self._nextDashboardID = 0

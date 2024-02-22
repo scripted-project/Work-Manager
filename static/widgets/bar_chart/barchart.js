@@ -1,3 +1,5 @@
+import Chart from 'chart.js';
+
 const form = document.getElementById('form');
 
 function start() {

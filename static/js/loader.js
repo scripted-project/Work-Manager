@@ -25,11 +25,11 @@ function setUpDashboard(dashboardID) {
     const container = document.getElementById('container'); // get container
     if (container == null) {return;} // prove non-null
 
-    dashboardData["widgets"].forEach(element => {
+    dashboardData.widgets.forEach(element => {
         const div = document.createElement('div');
         container.appendChild(div);
         div.id = n;
-        load(n, element["id"], '', element["x"], element["y"], element["height"], element["width"]);
+        load(n, element.id, '', element.x, element.y, element.height, element.width);
         // load element into container
         n += 1;
     });
@@ -65,4 +65,4 @@ function widgetOverlay() {
     });
 }
 
-export { load, setUpDashboard, addWidget };
+export { load, setUpDashboard, addWidget, widgetOverlay, newDIV };

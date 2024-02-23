@@ -2,7 +2,7 @@ async function get(url) {
     try {
         const response = await fetch(url);
         const data = await response.json()
-        data["code"] = response.status;
+        data.code = response.status;
         return data
     } catch (error) {
         return null;

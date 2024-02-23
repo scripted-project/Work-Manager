@@ -3,20 +3,38 @@
     <head></head>
     <body>
         <canvas id="chart-id"></canvas>
+        <form onsubmit="newChart()">
+            <input type="text" id="height"/>
+            <input type="text" id="section"/>
+            <input type="text" id="color"/>
+        </form>
     </body>
 </html>
 <script
 src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 </script>
 <script>
-const chart = new Chart("chart-id", {
-    type: "line",
-    data: {
-        datasets: [{
-            pointRadius: 4,
-            data: [{x:1, y:1}, {x:2, y:2}]
-        }]
-    },
-    option: {}
-});
+function newChart() {
+    const height = parseInt(document.getElementById("height").innerText);
+    const section = document.getElementById("section").innerText;
+    const color = document.getElementById("color").innerText;
+
+    const xv = [section];
+    const yv = [height];
+    const nv = [color];
+
+    const chart = new Chart("chart-id", {
+        type: "bar",
+        data: {
+            labels: xv,
+            datasets: [{
+                backgroundColor: nv,
+                pointRadius: 4,
+                data: [yv]
+            }]
+        },
+        option: {}
+    });    
+}
+
 </script>        

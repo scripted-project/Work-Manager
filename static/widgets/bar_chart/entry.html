@@ -21,9 +21,9 @@ function newChart() {
     const section = document.getElementById("section").innerText;
     const color = document.getElementById("color").innerText;
 
-    const xv = [section];
-    const yv = [height];
-    const nv = [color];
+    const xv = ["Cool", "Other"];
+    const yv = [2, 3];
+    const nv = ["red", green];
 
     const chart = new Chart("chart-id", {
         type: "bar",
@@ -37,6 +37,6 @@ function newChart() {
         },
         option: {}
     });    
-}
-
+    }
+newChart();
 </script>        

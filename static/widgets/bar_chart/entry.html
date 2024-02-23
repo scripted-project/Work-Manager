@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html>
+    <head></head>
     <body>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-
-        <canvas id="barchart style="width:100%;max-width:600px"></canvas>
-
-        <form onsubmit="start()" id="form">
-            <input id="first-data" type="text"/>
-            <input id="second-data" type="text"/>
-            <button type="submit">Submit</button>
-        </form>
+        <canvas id="chart-id"></canvas>
     </body>
-    <script src="./barchart.js"></script>
 </html>
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
 <script>
-
+const chart = new Chart("chart-id", {
+    type: "line",
+    data: {
+        datasets: [{
+            pointRadius: 4,
+            data: [{x:1, y:1}, {x:2, y:2}]
+        }]
+    },
+    option: {}
+});
 </script>        

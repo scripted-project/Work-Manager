@@ -2,15 +2,13 @@
 <html>
     <head></head>
     <body>
-        
+        <div id="container" style="display: grid;"></div>
     </body>
     <script>
         var baseUrl = "{{ url_for('static', filename='') }}";
     </script>
     <script type="module" src="{{ url_for('static', filename='js/loader.js') }}"></script>
     <script>
-        load(1, "bar_chart", "", 0, 0, 2, 2);
-        load(1, "pie_chart", "", 0, 0, 2, 2);
-        load(1, "example_widget", "", 0, 0, 2, 2);
+        load("container", "example_widget", 0, 0, 0, 0)
     </script>
 </html>

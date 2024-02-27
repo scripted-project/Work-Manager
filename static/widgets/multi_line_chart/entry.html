@@ -24,9 +24,9 @@ function newChart() {
     new Chart("chart", {
     type: "line",
     data: {
-        labels: xValues,
+        labels: [200, 400, 800, 1000, 2000, 4000, 8000],
         datasets: [{
-        data: [860,1140,1060,1060,1070,1110,1330,2210,7830,2478],
+        data: xValues,
         borderColor: "red",
         fill: false
         },{

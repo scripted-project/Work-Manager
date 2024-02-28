@@ -1,5 +1,5 @@
 {
-    "id": "Normally would be a string of letters, but for our purposes, we will just use 'example_dashboard'",
+    "id": "Normally would be a whole number, but for our purposes, we will just use 'example_dashboard'",
     "widgets": [
         {
             "id": "example_widget",

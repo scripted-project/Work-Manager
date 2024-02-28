@@ -1,38 +1,68 @@
 import * as api from './api.js';
-var n = 0;
 
-var searchParams = new URLSearchParams();
-let dashboardID = searchParams;
+let n = 0;
 
-// Raw load into a container
-function load(widgetID, containerID, settingsString = "") {
-    const iframe = document.createElement('div');
-    iframe.src = `/widgets/${widgetID}/entry.html?${settingsString}`;
-    document.getElementById(containerID).innerHTML = iframe;
+function load(containerID, name, settingsString, x, y, height, width) {
+    try {
+        const iframe = document.createElement('iframe');
+        var src = `${baseURL}/widgets/${name}/entry.html${settingsString}`;
+        iframe.src = src;
+        iframe.style = `
+        grid-row-start: ${x};
+        grid-column-start: ${y};
+        grid-column: 1 / ${width};
+        grid-row: 1 / ${height};
+        `
+        document.getElementById(containerID).appendChild(iframe);
+    } catch {}
 }
-// Creates and returns a new divider/container
-function newDiv(id, innerHTML = "", style = "") {
-    const div = document.createElement('div');
-    div.id = id;
-    div.innerHTML = innerHTML;
-    div.style = style;
-    return div;
+
+function setUpDashboard(dashboardID) {
+    // comments were for video
+    const dashboardData = api.get(`/api/dashboards/${dashboardID}`); // get dashboard data
+    if (dashboardData == null) {return;} // prove non-null
+
+    const container = document.getElementById('container'); // get container
+    if (container == null) {return;} // prove non-null
+
+    dashboardData.widgets.forEach(element => {
+        const div = document.createElement('div');
+        container.appendChild(div);
+        div.id = n;
+        load(n, element.id, '', element.x, element.y, element.height, element.width);
+        // load element into container
+        n += 1;
+    });
 }
-// Adds a widget to the screen and to a dashboard
-// FIXME: Not thread safe
-async function addWidget(widgetID) {
-    var dash = await api.get(`/api/dashboards/${dashboardID}`);
-    dash.widgets.push({
+
+function addWidget(widgetID, dashboardID, x, y, height, width) {
+    let currentDash = api.get(`/api/dashboards/${dashboardID}`);
+    currentDash.dashboards.push({
         id: widgetID,
-        x: 0,
-        y: 0,
-        height: 1,
-        width: 1,
+        x: x,
+        y: y,
+        width: width,
+        height: height,
         settings: {}
     });
-    api.post(`/api/dashboards/${dashboardID}`, dash);
-    newDiv(n);
-    load(widgetID, n);
-
+    newDIV("container", n);
+    load(n, widgetID, '', x, y, height, width);
     n += 1;
 }
+function newDIV(container, i) {
+    const div = document.createElement('div');
+    div.id = i;
+    container.appendChild(div);
+}
+function widgetOverlay() {
+    const overlay = document.getElementById("overlay");
+    overlay.style.display = 'flex';
+    overlay.style.visibility = 'visible';
+    
+    data = api.get("/api/widgets-lst");
+    data.data.forEach(element => {
+        overlay.innerHTML += `<button onclick="addWidget(${element.name})"></button>`;
+    });
+}
+
+export { load, setUpDashboard, addWidget, widgetOverlay, newDIV };

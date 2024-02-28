@@ -6,6 +6,7 @@ from modules.server import Server
 from flask import Flask, make_response, request, url_for
 from secrets import choice
 from string import ascii_uppercase, ascii_lowercase, digits, punctuation
+from os import listdir, path
 import logging
 
 class API:
@@ -27,18 +28,13 @@ class API:
         @app.route("/api/widgets/<id>", methods=["GET"])
         def getwidget(id: str):
             data = JSONFile(f'./data/widgets/{id}.json')
-            try:
-                html = open(f'static/js/widgets/{id}/entry.html')
-                html = html.read()
-            except:
-                html = None
-            if (data.data == None or html == None):
+            if (data.data == None):
                 responseData = {}
                 response = make_response(responseData)
                 response.status_code = 404
                 return response
             else:
-                responseData = {"data": data.data, "html": html}
+                responseData = {"data": data.data}
                 response = make_response(responseData)
                 response.status_code = 200
                 return response
@@ -55,3 +51,23 @@ class API:
                 response = make_response(responseData)
                 response.status_code = 200
                 return response
+        @app.route("/api/widgets-lst")
+        def widgetlst():
+            _data = []
+            dir = "./data/widgets"
+
+            for name in listdir(dir):
+                json = JSONFile(path.join(dir, name))
+                _data.append(json.data)
+
+            data = {"data": _data}
+
+            response = make_response(data)
+            response.status_code = 200
+            return response
+        
+        @app.route("/api/report", methods=["POST"])
+        def report():
+            error = request.json["error"]
+            location = request.json["location"]
+            logger.log(f"POST '/api/report': {location} reported {error}")

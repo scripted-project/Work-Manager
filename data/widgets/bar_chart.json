@@ -1,0 +1,6 @@
+{
+    "name": "Bar Chart",
+    "id":"bar_chart",
+    "description":"a bar chart",
+    "settings" : {}
+}

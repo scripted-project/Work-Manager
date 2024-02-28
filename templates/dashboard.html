@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>WorkManger</title>
-  </head>  
-  <header>WorkManger</header>
-  <div class="container">
-    <h1>Pie Chart</h1>
-    <div>
-      <canvas id="pie-chart"></canvas>
-    </div>
-  </div>
+    <head></head>
+    <body>
+        <header>
+            <button onclick="widgetOverlay()">New Widget</button>
+        </header>
+        <div id="overlay">
+            <p>Select a widget</p>
+        </div>
+        <div id="container"></div>
+    </body>
+    <script src="{{ url_for('static', filename='js/loader.js')}}" type="module"></script>
+    <script>
+        const params = new URLSearchParams();
+        const id = params.get("id");
+        setUpDashboard(id);
+    </script>
 </html>

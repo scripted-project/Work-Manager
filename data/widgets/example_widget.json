@@ -1,8 +1,8 @@
 {
     "name": "Example Widget",
     "id": "example_widget",
-    "descrption": "An Example widget",
+    "description": "An Example widget",
     "settings": {
-        "setting1": {"type": "text", "default": "Hello World", "descrption": "Fun"}
+        "setting1": {"type": "text", "default": "Hello World", "description": "Fun"}
     }
 }

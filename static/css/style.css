@@ -5,12 +5,48 @@ body {
 }
 
 .page-1-main {
-    background-color: rgb(255, 128, 0);
+    background-color: #f65113;
     color: white;
 }
 .navagationbar {
-    color:orange;
+    background-color: #f65113;
     overflow: hidden;
+
+   
 }
 
-.navagationbar a {color: aliceblue;}
+.navagationbar a {
+    color: antiquewhite;
+    background-color: #f9b31c;
+    font-size: 15px;
+    padding: 14px 16px;
+    text decoration:none;
+    float:left;
+}
+
+.navagationbar a:hover {
+    color: antiquewhite;
+    background-color: #f9b31c;
+}
+
+.container {
+    display: grid;
+    grid-auto-columns: auto;
+    grid-auto-rows: auto;
+}
+
+#overlay {
+    position: fixed;
+    display: none;
+    visibility: hidden;
+    width: 70%;
+    height: 50%;
+    min-width: 70%;
+    min-height: 50%;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    cursor: pointer;
+}

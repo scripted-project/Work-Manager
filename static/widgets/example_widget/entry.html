@@ -3,7 +3,14 @@
     <body>
         <p>wsg</p>
         <p>This is an example widget!</p>
-        <button>Button</button>
-        <p>Click that</p>
+        <button onclick="change()">Button</button>
+        <p id="changable">Click that and this will change to setting 1</p>
     </body>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const setting1 = params.get('setting1');
+        function change() {
+            document.getElementById('changable').innerHTML = setting1;
+        }
+    </script>
 </html>

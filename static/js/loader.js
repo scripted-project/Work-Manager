@@ -2,13 +2,18 @@ import * as api from './api.js';
 var n = 0;
 
 var searchParams = new URLSearchParams();
-let dashboardID = searchParams;
+let dashboardID = searchParams.get("id");
 
 // Raw load into a container
 function load(widgetID, containerID, settingsString = "") {
-    const iframe = document.createElement('div');
-    iframe.src = `/widgets/${widgetID}/entry.html?${settingsString}`;
-    document.getElementById(containerID).innerHTML = iframe;
+    try {
+        const iframe = document.createElement('div');
+        iframe.src = `/widgets/${widgetID}/entry.html?${settingsString}`;
+        document.getElementById(containerID).innerHTML = iframe;    
+    } catch (err) {
+        
+    }
+    
 }
 // Creates and returns a new divider/container
 function newDiv(id, innerHTML = "", style = "") {
@@ -66,6 +71,14 @@ async function setUpDashboard(id) {
             n += 1;
         } catch (ex) {}
     });
+}
+
+function openOverlay() {
+    const overlay = document.getElementById("overlay");
+    overlay.style.display = 'flex';
+    overlay.style.visibility = 'visible';
+
+
 }
 
 export { load, setUpDashboard, addWidget, newDiv }

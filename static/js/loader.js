@@ -1,19 +1,30 @@
 import * as api from './api.js';
 var n = 0;
 
-var searchParams = new URLSearchParams();
+var searchParams = new URLSearchParams(location.href);
 let dashboardID = searchParams.get("id");
 
 // Raw load into a container
 function load(widgetID, containerID, settingsString = "") {
     try {
-        const iframe = document.createElement('div');
+        const iframe = document.createElement('iframe');
         iframe.src = `/widgets/${widgetID}/entry.html?${settingsString}`;
-        document.getElementById(containerID).innerHTML = iframe;    
+        document.getElementById(containerID).appendChild(iframe);
     } catch (err) {
-        
+        api.post('/api/report', {location: "load_func@loader.js", error: err});
+        throw new Error;
     }
-    
+}
+// instead of a complete raw load, gets the iframe for more control
+function get(widgetID, settingsString = "") {
+    try {
+        const iframe = document.createElement('iframe');
+        iframe.src = `/widgets/${widgetID}/entry.html?${settingsString}`;
+        return iframe;
+    } catch (err) {
+        api.post('/api/report', {location: "load_func@loader.js", error: err});
+        throw new Error;
+    }
 }
 // Creates and returns a new divider/container
 function newDiv(id, innerHTML = "", style = "") {
@@ -43,6 +54,7 @@ async function addWidget(widgetID) {
 }
 
 // Sets up the page for a dashboard
+// FIXME: also not thread safe
 async function setUpDashboard(id) {
     var dash = await api.get(`/api/dashboards/${id}`);
     let widgets;
@@ -77,8 +89,11 @@ function openOverlay() {
     const overlay = document.getElementById("overlay");
     overlay.style.display = 'flex';
     overlay.style.visibility = 'visible';
-
-
+}
+function closeOverlay() {
+    const overlay = document.getElementById('overlay');
+    overlay.style.display = 'none';
+    overlay.style.visibility = 'hidden';
 }
 
-export { load, setUpDashboard, addWidget, newDiv }
+export { load, setUpDashboard, addWidget, newDiv, get }

@@ -65,3 +65,9 @@ class API:
             response = make_response(data)
             response.status_code = 200
             return response
+        
+        @app.route("/api/report", methods=["POST"])
+        def report():
+            error = request.json["error"]
+            location = request.json["location"]
+            logger.log(f"POST '/api/report': {location} reported {error}")

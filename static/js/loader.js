@@ -10,6 +10,7 @@ function load(widgetID, containerID, settingsString = "") {
         const iframe = document.createElement('iframe');
         iframe.src = `/widgets/${widgetID}/entry.html?${settingsString}`;
         document.getElementById(containerID).appendChild(iframe);
+        return iframe;
     } catch (err) {
         api.post('/api/report', {location: "load_func@loader.js", error: err});
         throw new Error;
@@ -96,4 +97,12 @@ function closeOverlay() {
     overlay.style.visibility = 'hidden';
 }
 
-export { load, setUpDashboard, addWidget, newDiv, get }
+export { 
+    load, 
+    setUpDashboard, 
+    addWidget, 
+    newDiv, 
+    get, 
+    openOverlay, 
+    closeOverlay 
+}

@@ -9,17 +9,19 @@ body {
     color: white;
 }
 .navagationbar {
-    color:antiquewhite;
-    overflow: hidden;
     background-color: #f65113;
-    font-size: 20px;
-    padding: 14px 16px;
-    text decoration:none;
+    overflow: hidden;
+
+   
 }
 
 .navagationbar a {
     color: antiquewhite;
     background-color: #f9b31c;
+    font-size: 15px;
+    padding: 14px 16px;
+    text decoration:none;
+    float:left;
 }
 
 .navagationbar a:hover {

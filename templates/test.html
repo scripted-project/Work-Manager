@@ -1,32 +1,12 @@
 <!DOCTYPE html>
-
 <html>
-    <head>
-        <script src="/static/js/loader.js"></script>
-        <script type="application/javascript">
-            import { get, load } from '/static/js/loader.js';
-            api.get('/');
-            document.getElementById('text').innerHTML = "Connected_";
-            alert("test");
-            try {
-                load('example_widget', 'container', '');
-                const iframe = get("example_widget", "");
-                const p = document.createElement('p');
-                p.innerText = "Success";
-                document.getElementById('container').innerHTML += iframe;
-                document.getElementById('text').innerText += p.innerText;
-                alert("test_");
-            } catch (err) {
-                var p = document.createElement('p');
-                p.innerText = err;
-                document.getElementById('text').innerText = err;
-            }
-            start();
-        </script>
-    </head>
+    <head></head>
     <body>
-        <div id="container" style="height: auto; width: auto;"></div>
-        <p id="text">Placeholder</p>
-        <button onclick="load('example_widget', 'container', '')">Start</button>
+        <button onclick="addWidget('example_widget')">Add a widget</button>
+        <div id="container"></div>
     </body>
 </html>
+<script src="/static/js/loader.js"></script>
+<script type="text/javascript">
+    load('example_widget', 'container', 'setting1=hello');
+</script>

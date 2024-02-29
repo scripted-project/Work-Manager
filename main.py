@@ -11,7 +11,7 @@ srv = Server(app)
 app.secret_key = new_key(1024)
 
 unusedLog = logging.getLogger('werkzeug')
-unusedLog.setLevel(logging.ERROR)
+#unusedLog.setLevel(logging.ERROR)
 
 users = {}
 

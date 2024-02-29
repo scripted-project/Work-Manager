@@ -7,7 +7,7 @@ from flask import Flask, make_response, request, url_for
 from secrets import choice
 from string import ascii_uppercase, ascii_lowercase, digits, punctuation
 from os import listdir, path
-import logging
+import logging, json
 
 class API:
     def __init__(self, app: Flask, logger: Logger, server: Server):
@@ -65,9 +65,23 @@ class API:
             response = make_response(data)
             response.status_code = 200
             return response
+        @app.route("/api/dashboards/<_id>")
+        def getdashboard(_id: int):
+            f = open(f"data/dashboards/{_id}.json", 'r')
+            data = json.load(f)
+            if not data:
+                response = make_response({}, 404)
+                response.status_code = 404
+                return response
+            else:
+                responseData = {"data": data}
+                response = make_response(responseData, 200)
+                response.status_code = 200
+                return response
         
         @app.route("/api/report", methods=["POST"])
         def report():
             error = request.json["error"]
             location = request.json["location"]
-            logger.log(f"POST '/api/report': {location} reported {error}")
+            logger.log(f"POST '/api/report': {location} reported {error}", dontCensor = True)
+            return make_response({}, 200)

@@ -1,19 +1,21 @@
 <!DOCTYPE html>
+<script src="/static/js/api.js"></script>
+<script src="/static/js/loader.js"></script>
 <html>
-    <head></head>
+    <head>
+    </head>
     <body>
         <header>
-            <button onclick="widgetOverlay()">New Widget</button>
+            <button onclick="">New Widget</button>
         </header>
         <div id="overlay">
             <p>Select a widget</p>
         </div>
         <div id="container"></div>
     </body>
-    <script src="{{ url_for('static', filename='js/loader.js')}}" type="module"></script>
-    <script>
-        const params = new URLSearchParams();
-        const id = params.get("id");
-        setUpDashboard(id);
-    </script>
 </html>
+<script>
+    const params = new URLSearchParams(window.location.search);
+    setID(params.get("id"));
+    setUpDashboard();
+</script>>

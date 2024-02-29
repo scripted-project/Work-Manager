@@ -1,14 +1,12 @@
-async function get(url) {
+async function apiget(url) {
     try {
         const response = await fetch(url);
-        const data = await response.json()
-        data.code = response.status;
-        return data
+        return await response.json();
     } catch (error) {
         return null;
     }
 }
-async function post(url, data) {
+async function apipost(url, data) {
     try {
         const response = await fetch(url, {
             method: 'POST',
@@ -21,7 +19,7 @@ async function post(url, data) {
     }
 }
 
-async function patch(url, updatedFields) {
+async function apipatch(url, updatedFields) {
     try {
         const response = await fetch(url, {
             method: 'PATCH',
@@ -32,7 +30,4 @@ async function patch(url, updatedFields) {
     } catch (error) {
         return null;
     }
-}
-module.exports = {
-    get, patch, post
 }

@@ -44,11 +44,10 @@ function newDiv(id, innerHTML = "", style = "") {
     div.id = id;
     div.innerHTML = innerHTML;
     div.style = style;
-    document.appendChild(div);
+    document.body.appendChild(div);
     return div;
 }
 // Adds a widget to the screen and to a dashboard
-// FIXME: Not thread safe
 async function addWidget(widgetID) {
     try {
         let dash = await apiget(`/api/dashboards/${dashboardID}`);
@@ -65,13 +64,12 @@ async function addWidget(widgetID) {
         load(widgetID, div.id);
 
         n += 1;
-    } catch (ex) {
+    } catch (exc) {
         apipost('/api/report', {
             location: "addWidget_func@loader.js",
-            error: ex
-        })
+            error: {ex: exc, n: n}
+        });
     }
-    
 }
 
 // Sets up the page for a dashboard

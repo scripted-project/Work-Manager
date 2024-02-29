@@ -65,7 +65,12 @@ async function addWidget(widgetID) {
         load(widgetID, div.id);
 
         n += 1;
-    } catch () {}
+    } catch (ex) {
+        apipost('/api/report', {
+            location: "addWidget_func@loader.js",
+            error: ex
+        })
+    }
     
 }
 

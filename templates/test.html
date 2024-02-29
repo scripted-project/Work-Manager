@@ -2,11 +2,24 @@
 <html>
     <head></head>
     <body>
-        <button onclick="addWidget('example_widget')">Add a widget</button>
+        <button id="button">Add a widget</button>
         <div id="container"></div>
     </body>
 </html>
 <script src="/static/js/loader.js"></script>
+<script src="/static/js/api.js"></script>
 <script type="text/javascript">
-    load('example_widget', 'container', 'setting1=hello');
+    try {
+        load('example_widget', 'container', 'setting1=hello');
+        const button = document.getElementById('button');
+        button.addEventListener("click", () => {
+            addWidget('example_widget');
+        });
+    } catch (ex) {
+        apipost('/api/report', {
+            location: "test_script@test.html",
+            error: ex
+        });
+    }
+    
 </script>

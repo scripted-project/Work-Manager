@@ -10,7 +10,7 @@
                 <a href="/">Home</a>
                 <a class="active" href="/dashboard">Dashboard</a>
             </div>
-            <button onclick="">New Widget</button>
+            <button id="button">New Widget</button>
         </header>
         <div id="overlay">
             <p>Select a widget</p>
@@ -22,4 +22,8 @@
     const params = new URLSearchParams(window.location.search);
     setID(params.get("id"));
     setUpDashboard();
-</script>>
+
+    document.getElementById('button').addEventListener("click", () => {
+        addWidget('example_widget');
+    });
+</script>

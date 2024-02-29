@@ -17,7 +17,13 @@ function load(widgetID, containerID, settingsString = "") {
         document.getElementById(containerID).appendChild(iframe);
         return iframe;
     } catch (err) {
-        apipost('/api/report', {location: "load_func@loader.js", error: err});
+        apipost('/api/report', {
+            location: "load_func@loader.js", 
+            error: `Error: ${err}, Container: ${document.getElementById(containerID)}`
+        });
+        const p = document.createElement('p');
+        p.innerText = err;
+        document.getElementById(containerID).appendChild(p);
         throw new Error(err);
     }
 }
@@ -28,7 +34,7 @@ function get(widgetID, settingsString = "") {
         iframe.src = `/static/widgets/${widgetID}/entry.html?${settingsString}`;
         return iframe;
     } catch (err) {
-        apipost('/api/report', {location: "load_func@loader.js", error: err});
+        apipost('/api/report', err);
         throw new Error(err);
     }
 }
@@ -38,6 +44,7 @@ function newDiv(id, innerHTML = "", style = "") {
     div.id = id;
     div.innerHTML = innerHTML;
     div.style = style;
+    document.appendChild(div);
     return div;
 }
 // Adds a widget to the screen and to a dashboard
@@ -53,8 +60,8 @@ async function addWidget(widgetID) {
         settings: {}
     });
     apipost(`/api/dashboards/${dashboardID}`, dash);
-    newDiv(n);
-    load(widgetID, n);
+    const div = newDiv(n);
+    load(widgetID, div.id);
 
     n += 1;
 }
@@ -74,14 +81,18 @@ async function setUpDashboard() {
             try {
                 let __id = element.id;
 
-                newDiv(n);
-                load(__id, n);
+                const div = newDiv(n);
+                load(__id, div.id);
 
-                n += 1;
-            } catch (ex) { throw new Error(ex); }
+                n = n + 1;
+            } catch (ex) { apipost('/api/report', {
+                error: {ex: ex, n: n, divid: div.id},
+                location: "setUpDashboard_func@loader.js"
+            })}
         });
     } else {
         throw new Error(`${typeof _dash.data.widgets} is not array (dash is of type ${typeof dash})`)
+        
     }
     
 }

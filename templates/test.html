@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-
 <html>
     <head></head>
     <body>
+        <button onclick="addWidget('example_widget')">Add a widget</button>
         <div id="container"></div>
     </body>
 </html>
 <script src="/static/js/loader.js"></script>
 <script type="text/javascript">
-    load('example_widget', 'container', '');
+    load('example_widget', 'container', 'setting1=hello');
 </script>

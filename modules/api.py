@@ -83,5 +83,5 @@ class API:
         def report():
             error = request.json["error"]
             location = request.json["location"]
-            logger.log(f"POST '/api/report': {location} reported {error}")
-            return make_response({}, 200);
+            logger.log(f"POST '/api/report': {location} reported {error}", dontCensor = True)
+            return make_response({}, 200)

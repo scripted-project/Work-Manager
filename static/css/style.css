@@ -11,8 +11,7 @@ body {
 .navagationbar {
     background-color: #f65113;
     overflow: hidden;
-    border-color: black;
-    border-radius: 4px;
+    border-bottom: 3px black;
 
    
 }

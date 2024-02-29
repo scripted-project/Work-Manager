@@ -69,14 +69,13 @@ class API:
         def getdashboard(_id: int):
             f = open(f"data/dashboards/{_id}.json", 'r')
             data = json.load(f)
-            if (data == None):
-                responseData = {}
-                response = make_response()
+            if not data:
+                response = make_response({}, 404)
                 response.status_code = 404
                 return response
             else:
                 responseData = {"data": data}
-                response = make_response(responseData)
+                response = make_response(responseData, 200)
                 response.status_code = 200
                 return response
         
@@ -85,3 +84,4 @@ class API:
             error = request.json["error"]
             location = request.json["location"]
             logger.log(f"POST '/api/report': {location} reported {error}")
+            return make_response({}, 200);

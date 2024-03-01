@@ -39,12 +39,16 @@ function get(widgetID, settingsString = "") {
     }
 }
 // Creates and returns a new divider/container
-function newDiv(id, innerHTML = "", style = "") {
+function newDiv(id, outer = "container", innerHTML = "", style = "") {
     const div = document.createElement('div');
     div.id = id;
     div.innerHTML = innerHTML;
     div.style = style;
-    document.body.appendChild(div);
+    if (outer == "" || outer == null) {
+        document.body.appendChild(div);
+    } else {
+        document.getElementById(outer).appendChild(div);
+    }
     return div;
 }
 // Adds a widget to the screen and to a dashboard

@@ -51,7 +51,7 @@ function newDiv(id, innerHTML = "", style = "") {
 async function addWidget(widgetID) {
     try {
         let dash = await apiget(`/api/dashboards/${dashboardID}`);
-        dash.widgets.push({
+        dash.data.widgets.push({
             id: widgetID,
             x: 0,
             y: 0,
@@ -59,7 +59,7 @@ async function addWidget(widgetID) {
             width: 1,
             settings: {}
         });
-        apipost(`/api/dashboards/${dashboardID}`, dash);
+        apipost(`/api/dashboards/${dashboardID}`, dash.data);
         const div = newDiv(n);
         load(widgetID, div.id);
 
@@ -69,11 +69,12 @@ async function addWidget(widgetID) {
             location: "addWidget_func@loader.js",
             error: {ex: exc, n: n}
         });
+        throw new Error(exc);
     }
 }
 
 // Sets up the page for a dashboard
-// FIXME: also not thread safe
+// Working
 async function setUpDashboard() {
     let id = dashboardID;
     console.log("id: ", id);

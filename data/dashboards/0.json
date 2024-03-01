@@ -1,1 +1,1 @@
-{"id": 0, "widgets": [{"id": "example_widget", "settings": {"setting1": "cool"}, "x": 1, "y": 1, "height": 10, "width": 10}]}
+{"id": 0, "widgets": [{"height": 10, "id": "example_widget", "settings": {"setting1": "cool"}, "width": 10, "x": 1, "y": 1}, {"id": "example_widget", "x": 0, "y": 0, "height": 1, "width": 1, "settings": {}}]}

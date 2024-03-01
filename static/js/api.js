@@ -1,6 +1,8 @@
 async function apiget(url) {
     try {
-        const response = await fetch(url);
+        const response = await fetch(url, {
+            method: 'GET'
+        });
         return await response.json();
     } catch (error) {
         return null;

@@ -102,25 +102,30 @@ async function setUpDashboard() {
             })}
         });
     } else {
-        throw new Error(`${typeof _dash.data.widgets} is not array (dash is of type ${typeof dash})`)
+        throw new Error(`${typeof _dash.data.widgets} is not array (dash is of type ${typeof dash})`);
         
     }
     
 }
 
 function openOverlay() {
-    const overlay = document.getElementById("overlay");
-    overlay.style.display = 'flex';
-    overlay.style.visibility = 'visible';
+    try {
+        const overlay = document.getElementById("overlay");
+        overlay.style.display = 'flex';
+        overlay.style.visibility = 'visible';
 
-    const widgets = apiget('/api/widgets-lst');
-    if (Array.isArray(widgets.data)) {
-        widgets.data.forEach(element => {
-            const button = document.createElement('button');
-            button.innerText = element.name;
-            overlay.appendChild(button);
-        });
+        const widgets = apiget('/api/widgets-lst');
+        if (Array.isArray(widgets.data)) {
+            widgets.data.forEach(element => {
+                const button = document.createElement('button');
+                button.innerText = element.name;
+                overlay.appendChild(button);
+            });
+        }    
+    } catch (err) {
+        apipost('/api/report', {location: "openOverlay_func@loader.js", error: {ex: err}});
     }
+    
 }
 function closeOverlay() {
     const overlay = document.getElementById('overlay');

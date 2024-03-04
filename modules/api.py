@@ -57,8 +57,8 @@ class API:
             dir = "./data/widgets"
 
             for name in listdir(dir):
-                json = JSONFile(path.join(dir, name))
-                _data.append(json.data)
+                f = open(path.join(dir, name))
+                _data.append(json.load(f))
 
             data = {"data": _data}
 

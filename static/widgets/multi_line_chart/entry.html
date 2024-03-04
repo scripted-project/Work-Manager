@@ -14,7 +14,11 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 </script>
 <script>
 function newChart() {
-    const xValues = [
+    const yValues = [
+        parseInt(document.getElementById("input-1").value),
+        parseInt(document.getElementById("input-2").value),
+        parseInt(document.getElementById("input-3").value),
+        parseInt(document.getElementById("input-4").value),
         parseInt(document.getElementById("input-1").value),
         parseInt(document.getElementById("input-2").value),
         parseInt(document.getElementById("input-3").value),
@@ -26,7 +30,7 @@ function newChart() {
     data: {
         labels: [200, 400, 800, 1000, 2000, 4000, 8000],
         datasets: [{
-        data: xValues,
+        data: yValues,
         borderColor: "red",
         fill: false
         },{

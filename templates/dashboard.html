@@ -12,7 +12,9 @@
                 <a href="/">Home</a>
                 <a class="active" href="/dashboard">Dashboard</a>
             </div>
-            <button id="button">New Widget</button>
+            <button id="new_ex_button">New Example Widget</button>
+            <button id="new_docs_button">New Docs Widget</button>
+            <button id="new_mlc_button">New Multi-Line Chart Widget</button>
         </header>
         <div id="overlay">
             <p>Select a widget</p>
@@ -25,7 +27,13 @@
     setID(params.get("id"));
     setUpDashboard();
 
-    document.getElementById('button').addEventListener("click", () => {
-        addWidget('example_widget');
-    });
+    document.getElementById('new_ex_button').addEventListener("click", () => 
+        addWidget('example_widget')
+    );
+    document.getElementById('new_docs_button').addEventListener("click", () => 
+        addWidget('docs')
+    );
+    document.getElementById('new_mlc_button').addEventListener("click", () => 
+        addWidget('multi_line_chart')
+    );
 </script>

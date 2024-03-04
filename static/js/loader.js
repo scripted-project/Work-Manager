@@ -107,6 +107,15 @@ function openOverlay() {
     const overlay = document.getElementById("overlay");
     overlay.style.display = 'flex';
     overlay.style.visibility = 'visible';
+
+    const widgets = apiget('/api/widgets-lst');
+    if (Array.isArray(widgets.data)) {
+        widgets.data.forEach(element => {
+            const button = document.createElement('button');
+            button.innerText = element.name;
+            overlay.appendChild(button);
+        });
+    }
 }
 function closeOverlay() {
     const overlay = document.getElementById('overlay');

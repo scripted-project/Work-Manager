@@ -65,8 +65,8 @@ class API:
             response = make_response(data)
             response.status_code = 200
             return response
-        @app.route("/api/dashboards/<_id>")
-        def dashboard(_id: int):
+        @app.route("/api/dashboards/<_id>", methods=["POST", "GET"])
+        def apidashboard(_id: int):
             if request.method == 'GET':
                 f = open(f"data/dashboards/{_id}.json", 'r')
                 data = json.load(f)
@@ -81,7 +81,8 @@ class API:
                     return response
             elif request.method == 'POST':
                 f = open(f"data/dashboards/{_id}.json", 'w')
-                dump(f, request.json)
+                json.dump(request.json, f)
+                return make_response({}, 200)
         
         @app.route("/api/report", methods=["POST"])
         def report():

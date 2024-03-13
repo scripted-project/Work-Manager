@@ -65,6 +65,7 @@ async function addWidget(widgetID) {
         });
         apipost(`/api/dashboards/${dashboardID}`, dash.data);
         const div = newDiv(n);
+
         load(widgetID, div.id);
 
         n += 1;
@@ -103,9 +104,7 @@ async function setUpDashboard() {
         });
     } else {
         throw new Error(`${typeof _dash.data.widgets} is not array (dash is of type ${typeof dash})`);
-        
     }
-    
 }
 
 function openOverlay() {
